@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:iPlato_Test.ViewModels"
+                    xmlns:utils="clr-namespace:iPlato_Test.Utils"
+                     xmlns:local="clr-namespace:iPlato_Test.CommonUserControls"
+                    >
+
+
+    <DataTemplate x:Key="PeopleViewModel:Detail">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="350"></ColumnDefinition>
+                <ColumnDefinition Width="17"></ColumnDefinition>
+                <ColumnDefinition  Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Column="0" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="People" FontWeight="Bold"></TextBlock>
+                </GroupBox.Header>
+                <ListView Height="150" 
+Name="personsListBox" 
+ItemsSource="{Binding People,Mode=OneWay}" 
+                     SelectedItem="{Binding SelectedPerson,Mode=TwoWay}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+
+                            <GridViewColumn Header="Date Of Birth" Width="150" DisplayMemberBinding="{Binding DateOfBirth}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </GroupBox>
+            <GroupBox Grid.Column="2" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Person" FontWeight="Bold"></TextBlock>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="17"></ColumnDefinition>
+                        <ColumnDefinition Width="175"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ContentControl Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="ObjectDetailViewContentControl" Content="{Binding DataContext.Person,
+                                                        RelativeSource={RelativeSource AncestorType=local:ContentPlaceHolder},
+                                                        Mode=OneWay}" Margin="5,5,5,5" VerticalAlignment="Stretch">
+                        <ContentControl.ContentTemplateSelector>
+                            <utils:ClassDataTemplateSelector ViewTypeId="Detail" />
+                        </ContentControl.ContentTemplateSelector>
+                    </ContentControl>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+                        <Button Width="80" Height="25" HorizontalAlignment="Stretch" Content="Add" Command="{Binding CommandAdd}"></Button>
+                        <Button Width="80" Margin="5,0,0,0"  HorizontalAlignment="Stretch" Content="Update" Command="{Binding CommandUpdate}"></Button>
+                        <Button Width="80" Margin="5,0,0,0" HorizontalAlignment="Stretch" Content="Delete" Command="{Binding CommandDelete}"></Button>
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

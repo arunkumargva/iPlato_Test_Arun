@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="iPlato_Test.CommonUserControls.ContentPlaceHolder"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:iPlato_Test.CommonUserControls"
+             xmlns:utils="clr-namespace:iPlato_Test.Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="1"
+                      VerticalAlignment="Stretch"
+                      BorderThickness="0">
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ContentControl x:Name="ObjectDetailViewContentControl" Content="{Binding DataContext,
+                                                        RelativeSource={RelativeSource AncestorType=local:ContentPlaceHolder},
+                                                        Mode=OneWay}" Margin="5,5,5,5" VerticalAlignment="Stretch">
+                    <ContentControl.ContentTemplateSelector>
+                        <utils:ClassDataTemplateSelector ViewTypeId="Detail" />
+                    </ContentControl.ContentTemplateSelector>
+                </ContentControl>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>
